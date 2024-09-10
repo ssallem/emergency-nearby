@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="emerency_nearby">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>emerency_nearby</title>
+  <link rel="manifest" href="manifest.json">
+
+  <script>
+    // The value below is injected by flutter build, do not touch.
+    const serviceWorkerVersion = "2772038387";
+  </script>
+
+  <!-- flutter.js 스크립트 추가 -->
+  <script src="flutter.js" defer></script>
+
+  <!-- Google Maps API 및 marker 라이브러리 추가 -->
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD84ln14MB6auRKS18msBHOzToSXuvdN6A&callback=initMap&libraries=marker"
+  ></script>
+
+  <style>
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    window.addEventListener('load', function(ev) {
+      if (typeof _flutter !== 'undefined' && _flutter.loader) {
+        // Ensure that _flutter.loader is defined and available
+        _flutter.loader.loadEntrypoint({
+          serviceWorker: {
+            serviceWorkerVersion: serviceWorkerVersion,
+          },
+          onEntrypointLoaded: function(engineInitializer) {
+            engineInitializer.initializeEngine().then(function(appRunner) {
+              appRunner.runApp();
+            });
+          }
+        });
+      } else {
+        console.error('Flutter loader is not defined. Make sure flutter.js is loaded correctly.');
+      }
+    });
+  </script>
+
+  <div id="map"></div>
+
+  <script>
+    function initMap() {
+      const mapOptions = {
+        center: { lat: 37.7749, lng: -122.4194 },
+        zoom: 12,
+        mapId: 'a7624e94ef4e3dab', // 여기에 유효한 지도 ID를 입력
+      };
+
+      const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+      // AdvancedMarkerElement 사용 예시
+      const markerElement = new google.maps.marker.AdvancedMarkerElement({
+        map: map,
+        position: { lat: 37.7749, lng: -122.4194 },
+        title: "Emergency Room",
+      });
+    }
+  </script>
+</body>
+</html>
